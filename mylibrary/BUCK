@@ -1,0 +1,140 @@
+android_resource(
+	name = 'res_debug',
+	package = 'com.squareup.mylibrary',
+	res = res_glob([
+		('src/main/res', '**'),
+	]),
+	resource_union = True,
+	visibility = [
+		'PUBLIC',
+	],
+)
+
+android_build_config(
+	name = 'build_config_debug',
+	package = 'com.squareup.mylibrary',
+	values = [
+		'String APPLICATION_ID = "com.squareup.mylibrary"',
+		'String BUILD_TYPE = "debug"',
+		'String FLAVOR = ""',
+		'int VERSION_CODE = 1',
+		'String VERSION_NAME = "1.0"',
+	],
+	visibility = [
+		'PUBLIC',
+	],
+)
+
+android_library(
+	name = 'src_debug',
+	srcs = glob([
+		'src/main/java/**/*.java',
+	]),
+	manifest = '//.okbuck/gen/mylibrary/debug:AndroidManifest.xml',
+	source = '7',
+	target = '7',
+	deps = [
+		':build_config_debug',
+		':res_debug',
+	],
+	visibility = [
+		'PUBLIC',
+	],
+)
+
+genrule(
+	name = 'lint_debug',
+	srcs = [
+		'src/main/java',
+		'src/main/res',
+	],
+	out = 'lint_debug_out',
+	bash = '' \
+	'mkdir -p $OUT; ' \
+	'RUN_IN=`dirname $(location //.okbuck/gen/mylibrary/debug:AndroidManifest.xml)`; ' \
+	'exec java ' \
+	'-Djava.awt.headless=true ' \
+	'-Xmx1024m ' \
+	'-classpath $(location //.okbuck/cache/lint:okbuck_lint) ' \
+	'com.android.tools.lint.Main ' \
+	'--classpath $(location :src_debug) ' \
+	'--exitcode ' \
+	'--fullpath ' \
+	'--xml "$OUT/lint-results.xml" ' \
+	'--html "$OUT/lint-results.html" ' \
+	'--sources src/main/java ' \
+	'--resources src/main/res ' \
+	'$RUN_IN ' \
+	'',
+)
+
+android_resource(
+	name = 'res_release',
+	package = 'com.squareup.mylibrary',
+	res = res_glob([
+		('src/main/res', '**'),
+	]),
+	resource_union = True,
+	visibility = [
+		'PUBLIC',
+	],
+)
+
+android_build_config(
+	name = 'build_config_release',
+	package = 'com.squareup.mylibrary',
+	values = [
+		'String APPLICATION_ID = "com.squareup.mylibrary"',
+		'String BUILD_TYPE = "release"',
+		'String FLAVOR = ""',
+		'int VERSION_CODE = 1',
+		'String VERSION_NAME = "1.0"',
+	],
+	visibility = [
+		'PUBLIC',
+	],
+)
+
+android_library(
+	name = 'src_release',
+	srcs = glob([
+		'src/main/java/**/*.java',
+	]),
+	manifest = '//.okbuck/gen/mylibrary/release:AndroidManifest.xml',
+	source = '7',
+	target = '7',
+	deps = [
+		':build_config_release',
+		':res_release',
+	],
+	visibility = [
+		'PUBLIC',
+	],
+)
+
+genrule(
+	name = 'lint_release',
+	srcs = [
+		'src/main/java',
+		'src/main/res',
+	],
+	out = 'lint_release_out',
+	bash = '' \
+	'mkdir -p $OUT; ' \
+	'RUN_IN=`dirname $(location //.okbuck/gen/mylibrary/release:AndroidManifest.xml)`; ' \
+	'exec java ' \
+	'-Djava.awt.headless=true ' \
+	'-Xmx1024m ' \
+	'-classpath $(location //.okbuck/cache/lint:okbuck_lint) ' \
+	'com.android.tools.lint.Main ' \
+	'--classpath $(location :src_release) ' \
+	'--exitcode ' \
+	'--fullpath ' \
+	'--xml "$OUT/lint-results.xml" ' \
+	'--html "$OUT/lint-results.html" ' \
+	'--sources src/main/java ' \
+	'--resources src/main/res ' \
+	'$RUN_IN ' \
+	'',
+)
+
