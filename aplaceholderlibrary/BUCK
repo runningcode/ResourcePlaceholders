@@ -30,7 +30,7 @@ android_library(
 	srcs = glob([
 		'src/main/java/**/*.java',
 	]),
-	manifest = '//.okbuck/gen/placeholderlibrary/debug:AndroidManifest.xml',
+	manifest = '//.okbuck/gen/aplaceholderlibrary/debug:AndroidManifest.xml',
 	source = '7',
 	target = '7',
 	deps = [
@@ -51,7 +51,7 @@ genrule(
 	out = 'lint_debug_out',
 	bash = '' \
 	'mkdir -p $OUT; ' \
-	'RUN_IN=`dirname $(location //.okbuck/gen/placeholderlibrary/debug:AndroidManifest.xml)`; ' \
+	'RUN_IN=`dirname $(location //.okbuck/gen/aplaceholderlibrary/debug:AndroidManifest.xml)`; ' \
 	'exec java ' \
 	'-Djava.awt.headless=true ' \
 	'-Xmx1024m ' \
@@ -100,7 +100,7 @@ android_library(
 	srcs = glob([
 		'src/main/java/**/*.java',
 	]),
-	manifest = '//.okbuck/gen/placeholderlibrary/release:AndroidManifest.xml',
+	manifest = '//.okbuck/gen/aplaceholderlibrary/release:AndroidManifest.xml',
 	source = '7',
 	target = '7',
 	deps = [
@@ -121,7 +121,7 @@ genrule(
 	out = 'lint_release_out',
 	bash = '' \
 	'mkdir -p $OUT; ' \
-	'RUN_IN=`dirname $(location //.okbuck/gen/placeholderlibrary/release:AndroidManifest.xml)`; ' \
+	'RUN_IN=`dirname $(location //.okbuck/gen/aplaceholderlibrary/release:AndroidManifest.xml)`; ' \
 	'exec java ' \
 	'-Djava.awt.headless=true ' \
 	'-Xmx1024m ' \

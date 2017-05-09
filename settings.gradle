@@ -1,1 +1,1 @@
-include ':app', ':mylibrary', ':placeholderlibrary'
+include ':app', ':mylibrary', ':aplaceholderlibrary'
