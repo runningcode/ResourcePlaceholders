@@ -12,3 +12,6 @@ android {
   }
 }
 
+dependencies {
+  compile project(':mylibrary')
+}

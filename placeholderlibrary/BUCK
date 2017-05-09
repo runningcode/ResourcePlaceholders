@@ -5,6 +5,9 @@ android_resource(
 		('src/main/res', '**'),
 	]),
 	resource_union = True,
+	deps = [
+		'//mylibrary:res_release',
+	],
 	visibility = [
 		'PUBLIC',
 	],
@@ -34,6 +37,8 @@ android_library(
 	source = '7',
 	target = '7',
 	deps = [
+		'//mylibrary:res_release',
+		'//mylibrary:src_release',
 		':build_config_debug',
 		':res_debug',
 	],
@@ -75,6 +80,9 @@ android_resource(
 		('src/main/res', '**'),
 	]),
 	resource_union = True,
+	deps = [
+		'//mylibrary:res_release',
+	],
 	visibility = [
 		'PUBLIC',
 	],
@@ -104,6 +112,8 @@ android_library(
 	source = '7',
 	target = '7',
 	deps = [
+		'//mylibrary:res_release',
+		'//mylibrary:src_release',
 		':build_config_release',
 		':res_release',
 	],
